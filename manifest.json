@@ -1,0 +1,28 @@
+{
+	"background_color": "#000",
+	"description": "Sidekick V13",
+	"dir": "ltr",
+	"display": "standalone",
+	"name": "Sidekick",
+	"orientation": "any",
+	"scope": "/",
+	"short_name": "Sidekick",
+	"start_url": "https://imessage-basic-v2.kerryaustin.repl.co/",
+	"theme_color": "#000",
+	"categories": [
+		"productivity"
+	],
+	"screenshots": [],
+	"icons": [
+		{
+			"src": "icon.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"shortcuts": [],
+	"display_override": [
+		"window-controls-overlay",
+		"standalone"
+	]
+}

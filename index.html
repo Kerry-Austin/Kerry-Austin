@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat Bot V14</title>
+
+<link rel="manifest" href="manifest.json">
+  
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.2/dist/flatly/bootstrap.min.css">
+	<!-- code highlighting -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/apprentice.min.css">
+
+	<!-- material design icons SLOW MOVE TO ICONIFY LATER -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css">
+
+  <!-- Your custom CSS file -->
+  <link rel="stylesheet" type="text/css" href="./style.css">
+	
+	
+</head>
+
+<body>
+	<!-- Button trigger for sign-in modal -->
+	<button type="button" class="btn btn-primary hidden" data-bs-toggle="modal" data-bs-target="#sign-in-modal" id="select-user-button">
+		Change User
+	</button>
+
+<!-- Recording modal -->
+	<div class="modal" id="recording-modal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Recording</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Recording animation goes here</p>
+				</div>
+				<div class="modal-footer">
+					<button id="cancel-recording-button" type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+					<button id="done-recording-button" data-bs-dismiss="modal" type="button" class="btn btn-success">Done Recording</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Sign-In Modal -->
+	<div class="modal fade" id="sign-in-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-fullscreen">
+			<div class="modal-content bg-black">
+				<div class="modal-body d-flex justify-content-center align-items-center">
+						<div class="card w-75 text-center">
+							<div class="card-body text-center">
+								<div class="row d-flex justify-content-center align-items-center m-3">
+									<h3>Sign In</h3>
+									<hr>
+									<button class="btn btn-primary m-3" id="google-sign-in-button" data-bs-dismiss="modal">Google Account</button>
+									<button class="btn btn-secondary m-3" id="bobby-sign-in-button" data-bs-dismiss="modal">Test User Bobby</button>
+									<button class="btn btn-secondary m-3" id="steve-sign-in-button" data-bs-dismiss="modal">Test User Steve</button>
+									<button class="btn btn-secondary m-3" id="joe-sign-in-button" data-bs-dismiss="modal">Test User Joe</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="app-container">
+		<nav class="navbar mb-0 p-1">
+    	<div class="container-fluid">
+				<button type="button" id="new-chat-button" class="btn">
+			<i class="mdi mdi-plus"></i>
+	</button>
+				<div class="dropdown">
+	        <button class="btn dropdown-toggle fs-6" type="button" id="dropdown-button" data-bs-toggle="dropdown"></button>
+	          <ul class="dropdown-menu">
+							<!-- Can hold seperate item, seprate from dropdown items
+							<li></li>
+							-->
+							<div id="conversation-list">
+								<li>
+								<a class="dropdown-item">Dynamic Item One</a>
+								</li>
+								<li><a class="dropdown-item">Dynamic Item Two</a></li>
+							</div>
+	          </ul>
+					
+
+	      </div>
+				<!-- Toggle button -->
+				<button id="settings-button" class="btn navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      		<i class="mdi mdi-dots-vertical"></i>
+    		</button>
+			<!-- -------------- -->
+			
+				
+    </div>
+			<!-- External content to toggle -->
+			
+		</nav>
+		<div class="collapse" id="navbarToggleExternalContent">
+				
+			<div id = "navbar-button-holder" class="d-flex justify-content-center">
+				<button class="btn btn-danger" id="delete-button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+								<i class="mdi mdi-delete"></i>
+				</button>
+				<button class ="hidden" type="button" id="clear-button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" class="btn btn-danger">
+					<i class="hidden mdi mdi-notification-clear-all"></i>
+				</button>
+
+			<button type="button" id="rename-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#conversation-name-modal">
+							<i class="mdi mdi-rename"></i>
+			</button>
+				<button type="button" id="system-message-button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#system-message-modal">
+					<i class="mdi mdi-thought-bubble"></i>
+				</button>
+				<button type="button" id="static-memory-button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#static-memory-modal">
+					<i class="mdi mdi-note-edit"></i>
+				</button>
+						<button class="btn btn-info" id="theme-button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+								<i class="mdi mdi-theme-light-dark"></i>
+				</button>
+			<button class="hidden btn btn-danger" id="conversation-mode-button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+							<i class="mdi mdi-account-voice-off"></i>
+			</button>
+			<button class="btn btn-danger" id="sign-in-button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+					<i id="sign-in-button-icon" class=""></i>
+				</button>
+			</div>
+			<button class="btn btn-clear position-relative m-3 top-30 start-50 translate-middle" id="current-user-label">
+				CURRENT USER
+			</button>
+		</div>
+    <div id="messages-container" class="imessage outline-0"></div>		
+		<div id="stop-button-container" class="center-bottom-input hidden">
+			<button id="stop-button" class="btn btn-danger rounded-5">
+				<i class="mdi mdi-stop-circle-outline d-inline-block" id="stopButtonIcon"></i>
+				<div id="stop-button-text" class="d-inline-block">Stop Recording or Speaking</div>
+			</button>
+		</div>
+    <div id="input-container" class="center-bottom-input input-container border rounded-5">
+  		<form id="input-forum" class="d-flex align-items-center">
+				<button type="button" class="btn send-button m-0" id="voice-input-button">
+					<i class="mdi mdi-microphone"></i>
+				</button>
+    <textarea id="input-box" placeholder="Send message" rows="1" class="form-control rounded-4 border-0 m-1" autocomplete="off"></textarea>
+    <button type="button" class="btn send-button m-0" id="send-input-button">
+			<i class="mdi mdi-send"></i>
+		</button>
+  </form>
+		</div>
+	</div>
+  
+
+
+	<!-- Bootstrap modal for renaming -->
+	<div class="modal" id="conversation-name-modal" tabindex="-1" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Rename Conversation</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+      	<div class="modal-body">
+					<input type="text" id="new-conversation-name" class="form-control">
+				</div>
+      	<div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="save-conversation-name-button" data-action="">Save changes</button>
+      	</div>
+    </div>
+  </div>
+</div>
+	
+	<!-- Bootstrap modal for system message -->
+	<div class="modal" id="system-message-modal" tabindex="-1" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Assistant's behavior:</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+      	<div class="modal-body">
+					<textarea id="new-system-message" class="form-control" rows="8" placeholder="How do you want your assistant to behave in this conversation? (Talk like a pirate, reply in Spanish, etc)"></textarea>
+				</div>
+      	<div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="save-system-message-button" data-action="">Save changes</button>
+      	</div>
+    </div>
+  </div>
+</div>
+
+	<!-- Bootstrap modal for static memory -->
+	<div class="modal" id="static-memory-modal" tabindex="-1" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Assistant's memory:</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+      	<div class="modal-body">
+					<textarea id="new-static-memory" class="form-control" rows="8" placeholder="Here, you can provide things your assistant should never forget in this conversation. (Your favorite color, your age, etc)"></textarea>
+				</div>
+      	<div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="save-static-memory-button" data-action="">Save changes</button>
+      	</div>
+    </div>
+  </div>
+</div>
+	
+  <!-- Bootstrap JS CDN (this won't work b/c replit only want local) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Your custom JS file -->
+  <script type="module" src="./index.js"></script>
+</body>
+</html>

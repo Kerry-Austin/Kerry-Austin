@@ -1,0 +1,29 @@
+{
+  "name": "imessage-basic",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/packager-raw-url": "^2.10.3",
+    "@parcel/transformer-webmanifest": "^2.10.3",
+    "buffer": "^6.0.3",
+    "parcel": "^2.10.3",
+    "process": "^0.11.10",
+    "punycode": "^1.4.1"
+  },
+  "dependencies": {
+    "autosize": "^6.0.1",
+    "clipboard": "^2.0.11",
+    "firebase": "^10.6.0",
+    "markdown-it": "^13.0.2",
+    "markdown-it-highlightjs": "^4.0.1",
+    "material-design-icons": "^3.0.1",
+    "socket.io-client": "^4.7.2",
+    "voice-activity-detection": "^0.0.5"
+  }
+}

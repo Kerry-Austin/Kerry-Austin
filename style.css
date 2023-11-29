@@ -1,0 +1,444 @@
+:root {
+	--background-color: white;
+	--text-color-general: black;
+	--accent-color: var(--background-color);
+
+	--light: #e9e9eb;
+	--dark: #26252a;
+
+	--from-them-bg-color: var(--light);
+	--from-them-text-color: black;
+	--from-me-bg-color: #2e93ff;
+	--from-me-text-color: #white;
+
+	--navbar-button-icon-color: black;
+	--navbar-button-color: black;
+
+	--input-box-color: white;
+	--input-text-color: black;
+	--send-button-color: var(--from-me-bg-color)
+}
+
+
+body, html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+		background-color: var(--background-color);
+}
+
+#app-container{
+	display: flex;
+	flex-direction: column; /* Keep your content in a column */
+	min-height: 100vh; /* Use min-height instead of height to cover the full viewport height */
+	justify-content: space-between; /* Aligns children at the start and end of the container */
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	/*
+	position: fixed;
+	top: 0;
+	*/
+	background: var(--background-color);
+}
+
+
+#messages-container {
+	overflow-y: auto;
+	flex-grow: 1;
+	background-color: var(--background-color);
+	margin-bottom: 10vh;
+}
+
+.center-bottom-input{
+	position: fixed; /* Fixed positioning to keep it at the bottom */
+	bottom: 0; /* Align to the bottom */
+	left: 50%; /* Start at the center of the screen */
+	transform: translateX(-50%); /* Shift it left by half its width to truly center it */
+	width: calc(100% - 2rem); /* Full width minus some padding */
+	padding: 0 1rem; /* Apply horizontal padding */
+	margin: 1rem 0;
+	box-sizing: border-box; /* Padding is included in the width */
+}
+
+
+
+.input-container {
+	background-color: var(--background-color);
+}
+
+
+
+
+
+code {
+	white-space: pre-wrap;
+	/* CSS3 */
+	word-wrap: break-word;
+}
+
+/*
+#messages-container{
+	background-color: white;
+}
+*/
+
+
+
+.hidden {
+	display: none !important;
+}
+
+
+
+.input-container textarea {
+	color: var(--input-text-color) !important;
+}
+
+#input-box::placeholder {
+	color: darkgray;
+}
+
+textarea {
+	max-height: 50vh;
+	/* Up to 50% of the viewable height */
+	overflow-y: auto;
+	/* Scroll bars appear when max-height is reached */
+	resize: none;
+}
+
+
+.hide-navbar {
+	transform: translateY(-100%);
+	transition: transform 0.3s ease-in-out;
+}
+
+.no-margin-bottom {
+	margin-bottom: 0;
+}
+
+/* To change text color of dropdown button */
+.btn.dropdown-toggle {
+	color: var(--text-color-general);
+}
+
+
+
+#navbar-button-holder {
+	display: flex !important;
+	/* Use Flexbox */
+	justify-content: center !important;
+	/* Center horizontally */
+}
+
+/* To change the background color of buttons in the navbar */
+#navbar-button-holder .btn,
+nav .btn {
+	background-color: var(--accent-color);
+	/* Background color for the button */
+}
+
+nav .btn:focus,
+nav .btn:hover {
+	background-color: var(--accent-color) !important;
+	/* Use the accent color for both hover and focus */
+	outline: none !important;
+	box-shadow: none !important;
+	color: var(--text-color-general);
+}
+
+
+/* To change text color of buttons in the navbar */
+#navbar-button-holder .btn i.mdi,
+nav .btn,
+#current-user-label {
+	color: var(--text-color-general);
+	/* White color for the icons */
+}
+
+
+#navbar-button-holder .btn {
+	margin: 0.25rem;
+}
+
+.message.assistant .message-buttons .btn i.mdi {
+	color: var(--text-color-general) !important;
+}
+
+#input-box {
+	background-color: var(--background-color);
+}
+
+
+/* Define the CSS for icons inside buttons */
+button.btn i.mdi {
+	font-size: 1.5rem;
+}
+
+#send-input-button i,
+#voice-input-button i {
+	color: var(--send-button-color);
+	font-size: 1.5rem;
+}
+
+/* Overriding Bootstrap's focus styling */
+textarea:focus {
+	box-shadow: none !important;
+	border-color: initial !important;
+}
+
+/* Typing animation */
+.typing-indicator {
+	background-color: #d219b9;
+	will-change: transform;
+	width: auto;
+	border-radius: 50px;
+	padding: 20px;
+	display: table;
+	margin: 0 auto;
+	position: relative;
+	animation: 2s bulge infinite ease-out;
+}
+
+.typing-indicator::before,
+.typing-indicator::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: -2px;
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	background-color: var(--from-them-bg-color);
+}
+
+.typing-indicator::after {
+	height: 10px;
+	width: 10px;
+	left: -10px;
+	bottom: -10px;
+}
+
+.typing-indicator .loading-dot {
+	height: 15px;
+	width: 15px;
+	float: left;
+	margin: 0 1px;
+	background-color: #9E9EA1;
+	display: block;
+	border-radius: 50%;
+	opacity: 0.4;
+}
+
+.typing-indicator .loading-dot:nth-of-type(1) {
+	animation: 1s blink infinite 0.3333s;
+}
+
+.typing-indicator .loading-dot:nth-of-type(2) {
+	animation: 1s blink infinite 0.6666s;
+}
+
+.typing-indicator .loading-dot:nth-of-type(3) {
+	animation: 1s blink infinite 0.9999s;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 1;
+	}
+}
+
+@keyframes bulge {
+	50% {
+		transform: scale(1.05);
+	}
+}
+
+
+
+/*-------------------------------*/
+
+
+div.from-me,
+div.from-them {
+	margin: 0.5rem 0;
+	width: fit-content;
+}
+
+.imessage {
+	background-color: var(--background-color);
+	display: flex;
+	flex-direction: column;
+	font-family: "SanFrancisco";
+	font-size: 1.15rem;
+	padding: 0.5rem 1.5rem;
+}
+
+.imessage div {
+	border-radius: 1.15rem;
+	line-height: 1.25;
+	max-width: 90%;
+	padding: 0.5rem .875rem;
+	position: relative;
+	word-wrap: break-word;
+}
+
+.imessage div::before,
+.imessage div::after {
+	bottom: -0.1rem;
+	content: "";
+	height: 1rem;
+	position: absolute;
+}
+
+div.from-me {
+	align-self: flex-end;
+	background-color: #248bf5;
+	color: #fff;
+}
+
+div.from-me::before {
+	border-bottom-left-radius: 0.8rem 0.7rem;
+	border-right: 1rem solid #248bf5;
+	right: -0.35rem;
+	transform: translate(0, -0.1rem);
+}
+
+div.from-me::after {
+	background-color: var(--background-color);
+	border-bottom-left-radius: 0.5rem;
+	right: -40px;
+	transform: translate(-30px, -2px);
+	width: 10px;
+}
+
+div[class^="from-"] {
+	margin: 0.5rem 0;
+	width: fit-content;
+}
+
+div.from-me~p.from-me {
+	margin: 0.25rem 0 0;
+}
+
+div.from-me~p.from-me:not(:last-child) {
+	margin: 0.25rem 0 0;
+}
+
+div.from-me~p.from-me:last-child {
+	margin-bottom: 0.5rem;
+}
+
+div.from-them {
+	align-items: flex-start;
+	background-color: var(--from-them-bg-color);
+	color: var(--from-them-text-color);
+}
+
+div.from-them:before {
+	border-bottom-right-radius: 0.8rem 0.7rem;
+	border-left: 1rem solid var(--from-them-bg-color);
+	left: -0.35rem;
+	transform: translate(0, -0.1rem);
+}
+
+div.from-them::after {
+	background-color: var(--background-color);
+	border-bottom-right-radius: 0.5rem;
+	left: 20px;
+	transform: translate(-30px, -2px);
+	width: 10px;
+}
+
+p[class^="from-"].emoji {
+	background: none;
+	font-size: 2.5rem;
+}
+
+p[class^="from-"].emoji::before {
+	content: none;
+}
+
+.no-tail::before {
+	display: none;
+}
+
+.margin-b_none {
+	margin-bottom: 0 !important;
+}
+
+.margin-b_one {
+	margin-bottom: 1rem !important;
+}
+
+.margin-t_one {
+	margin-top: 1rem !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* general styling */
+@font-face {
+	font-family: "SanFrancisco";
+	src:
+		url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff2") format("woff2"),
+		url("https://cdn.rawgit.com/AllThingsSmitty/fonts/25983b71/SanFrancisco/sanfranciscodisplay-regular-webfont.woff") format("woff");
+}
+
+body {
+	font-family: -apple-system,
+		BlinkMacSystemFont,
+		"Segoe UI",
+		Roboto,
+		Oxygen-Sans,
+		Ubuntu,
+		Cantarell,
+		"Helvetica Neue",
+		sans-serif;
+	font-weight: normal;
+	margin: 0;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 600px;
+	padding: 1rem;
+}
+
+h1 {
+	font-weight: normal;
+	margin-bottom: 0.5rem;
+}
+
+h2 {
+	border-bottom: 1px solid #e5e5ea;
+	color: #666;
+	font-weight: normal;
+	margin-top: 0;
+	padding-bottom: 1.5rem;
+}
+
+.comment {
+	color: #222;
+	font-size: 1.25rem;
+	line-height: 1.5;
+	margin-bottom: 1.25rem;
+	max-width: 100%;
+	padding: 0;
+}
